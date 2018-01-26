@@ -55,10 +55,44 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      //var jsonToCsv = function(json) { console.log(json); };
 
 
-      var addMarkers = function(map) {};
+      // to array of arrays
+      var onlyatt = healthCenters.map(function(healthCenter) {
+        return Object.keys(healthCenter).map(function(key){return healthCenter[key];});})
+      var attr = Object.keys(healthCenters[0])
+      onlyatt.splice(0,0,attr)
+      console.log(onlyatt)
+
+      // add markers
+      addMarker = function(location){L.marker([location[1], location[0]]).addTo(map).bindPopup(location[3]);};
+      var newatt = onlyatt.slice(1)
+      newatt.forEach(addMarker)
+
+      // change dental icon
+      var denatt = newatt.filter(location => location[8] != "N/A" && location[8] !="N/A ")
+
+
+      var myIcon = L.icon({
+          iconUrl: '/Users/ruochanghuang/Desktop/Spring2018/JavaScript/Week2/OST4GIS-week2/assignment/images/marker-icon-2x.png',
+          iconSize: [38, 95],
+          iconAnchor: [22, 94],
+          popupAnchor: [-3, -76],
+          shadowUrl: '/Users/ruochanghuang/Desktop/Spring2018/JavaScript/Week2/OST4GIS-week2/assignment/images/marker-shadow.png',
+          shadowSize: [68, 95],
+          shadowAnchor: [22, 94]
+        });
+      addMarker2 = function(location){L.marker([location[1], location[0]],{icon: myIcon}).addTo(map).bindPopup(location[3]);};
+      denatt.forEach(addMarker2)
+
+      var ndenatt = newatt.filter(location => location[8] == "N/A" || location[8] =="N/A ")
+      ndenatt.forEach(addMarker)
+      
+
+
+
+      //var addMarkers = function(map) {};
 
       /* =====================
 
