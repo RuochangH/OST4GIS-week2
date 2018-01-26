@@ -86,6 +86,17 @@
 
     ===================== */
 
+    var dataFiltered = []
+    for (var i=0; i<bikeArrayClean.length; i++)
+    { if (bikeArrayClean[i][3] >20) { var filter = bikeArrayClean[i]; dataFiltered.push(filter)} }
+
+    for (var i=0; i<dataFiltered.length; i++)
+    {L.marker([dataFiltered[i][1],dataFiltered[i][0]]).addTo(map)}
+
+    var fil =[]
+    for (var i=0; i<bikeArrayDirty; i++){if (bikeArrayDirty[i].length == 3) {var filter0 = bikeArrayDirty[i];fil.push(filter0)}}
+    for (var i=0; i<fil.length; i++) {L.marker([fil[i][1],fil[i][0]).addTo(map)}
+
 
 
     /* =====================
